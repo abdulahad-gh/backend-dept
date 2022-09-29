@@ -1,4 +1,5 @@
 const express = require('express')
+const toolsController = require('../controllers/controller')
 
 const route = express.Router()
 
@@ -26,9 +27,7 @@ route.route('/')
     * @apiError (Unauthorized 401) Unauthorized only Authenticated users can access the data
     * @apiError (Forbidden 403) Forbidden only admins can access the data
     */
-    .get((req, res) => {
-        res.send('tools found')
-    })
+    .get(toolsController.getAllTools)
     /**
      * @api post api for save tools
      * @apiDescription This api for save a single tools inside database
@@ -44,8 +43,6 @@ route.route('/')
      * @apiError not success
      * @apiError your product is already exists
      */
-    .post((req, res) => {
-        res.send('tools found with post method')
-    })
+    .post(toolsController.postATools)
 
 module.exports = route
