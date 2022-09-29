@@ -1,6 +1,7 @@
 const express = require('express')
 const toolsController = require('../controllers/controller')
 const { limiter } = require('../middleware/rateLimit')
+const { testMiddlewareFunc } = require('../middleware/testMiddleware')
 const { viewCountFun } = require('../middleware/viewCount')
 
 const route = express.Router()
@@ -46,5 +47,6 @@ route.route('/')
      * @apiError your product is already exists
      */
     .post(toolsController.postATools)
+    .put(testMiddlewareFunc, toolsController.PutATool)
 
 module.exports = route
