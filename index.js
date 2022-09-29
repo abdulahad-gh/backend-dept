@@ -8,12 +8,15 @@ const port = process.env.PORT || 5000;
 // const nodemailer = require("nodemailer");
 const dbConnect = require("./utils/dbConnect");
 const sendMail = require('./utils/sendMail')
-const toolsRoute = require('./routes/tools.route')
+const toolsRoute = require('./routes/tools.route');
+const { viewCountFun } = require("./middleware/viewCount");
+const { limiter } = require("./middleware/rateLimit");
 
 app.use(cors());
 app.use(express.json());
 
-
+// app.use(limiter)
+// app.use(viewCountFun)
 dbConnect()
 sendMail()
 app.use("/api/v1/tools", toolsRoute)

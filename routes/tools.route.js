@@ -1,5 +1,7 @@
 const express = require('express')
 const toolsController = require('../controllers/controller')
+const { limiter } = require('../middleware/rateLimit')
+const { viewCountFun } = require('../middleware/viewCount')
 
 const route = express.Router()
 
@@ -27,7 +29,7 @@ route.route('/')
     * @apiError (Unauthorized 401) Unauthorized only Authenticated users can access the data
     * @apiError (Forbidden 403) Forbidden only admins can access the data
     */
-    .get(toolsController.getAllTools)
+    .get(viewCountFun, limiter, toolsController.getAllTools)
     /**
      * @api post api for save tools
      * @apiDescription This api for save a single tools inside database
